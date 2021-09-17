@@ -41,7 +41,7 @@ func NewClient(cfg ClientConfig) (c Client, err error) {
 // marshall the query
 // unmarshall the answer
 // grab the ips from the answer
-func (c *Client) LookupAddr(addr string) (ips []string, err error) {
+func (c *Client) LookupAddr(addr string, rdint int) (ips []string, err error) {
 	var (
 		id      uint16
 		payload []byte
@@ -61,7 +61,7 @@ func (c *Client) LookupAddr(addr string) (ips []string, err error) {
 			QR:      0,
 			Opcode:  OpcodeQuery,
 			QDCOUNT: 1,
-			RD:      1,
+			RD:      rdint,
 		},
 		Questions: []*Question{
 			{
